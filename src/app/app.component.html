@@ -14,10 +14,26 @@
       </ol>
     </div>
   </div>
+
 </div>
 
 <hr>
-<h1>Game Timer: {{ gameCounter }} </h1>
-<hr>
 
-<app-game-control></app-game-control>
+<div class="container">
+  <h1>GAME CONTROLS</h1>
+  <app-game-control
+    (oddGameCreated)="onOddGameAdded($event)"
+    (evenGameCreated)="onEvenGameAdded($event)"></app-game-control>
+<hr>
+  <div class="row">
+    <div class="col">
+      <app-odd *ngFor="let game of oddGames" [oddGame]="game"></app-odd>
+    </div>
+    <div class="col">
+      <app-even *ngFor="let game of evenGames" [evenGame]="game"></app-even>
+    </div>
+  </div>
+
+</div>
+
+

@@ -6,6 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  gameCounter = 0;
+  oddGames = [];
+  evenGames = [];
 
+  onOddGameAdded(oddGameData: {oddGameNumber: number}) {
+    this.oddGames.push({
+      number: oddGameData.oddGameNumber
+    });
+
+  }
+
+  onEvenGameAdded(evenGameData: {evenGameNumber: number}) {
+    this.evenGames.push({
+      number: evenGameData.evenGameNumber
+    });
+
+  }
 }

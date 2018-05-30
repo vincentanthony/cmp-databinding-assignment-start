@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 
 
@@ -8,9 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./game-control.component.css']
 })
 export class GameControlComponent implements OnInit {
-
+  @Output() oddGameCreated = new EventEmitter<{oddGameNumber: number}>();
+  @Output() evenGameCreated = new EventEmitter<{evenGameNumber: number}>();
   gameTimer;
-  @Input() gameInt: number;
+  gameInt = 0;
+
 
   constructor() {
 
@@ -23,16 +25,32 @@ export class GameControlComponent implements OnInit {
 
   startGameTimer() {
     this.gameTimer = setInterval(() => this.logTimer(), 1000);
-
   }
 
   logTimer() {
     console.log(this.gameInt);
     this.gameInt++;
+    if (this.gameInt % 2 === 0) {
+      this.onAddEvenGame();
+    } else {
+      this.onAddOddGame();
+    }
 
   }
 
   stopGameTimer() {
     clearInterval(this.gameTimer);
   }
+
+  onAddOddGame() {
+    this.oddGameCreated.emit({oddGameNumber: this.gameInt});
+  }
+
+  onAddEvenGame() {
+    this.evenGameCreated.emit({evenGameNumber: this.gameInt});
+  }
+
+
+
+
 }
